@@ -1,72 +1,71 @@
-import styles from './Home.module.css';
-import {useProducts} from "../../contexts/ProductContext.tsx";
-import type {Category} from "../../types";
-import {Link} from "react-router-dom";
+import styles from "./Home.module.css";
+import { useProducts } from "../../hooks/useProducts.ts";
+import type { Category } from "../../types";
+import { Link } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard.tsx";
 
 function Home() {
+  const { getBestProducts, getNewProducts } = useProducts();
 
-    const {getBestProducts, getNewProducts} = useProducts();
+  const bestProducts = getBestProducts();
+  const newProducts = getNewProducts();
 
-    const bestProducts = getBestProducts();
-    const newProducts = getNewProducts();
+  const categories: Category[] = [
+    "전자기기",
+    "패션",
+    "식품",
+    "도서",
+    "생활용품",
+  ];
 
-    const categories:Category[] = [
-        "전자기기",
-        "패션",
-        "식품",
-        "도서",
-        "생활용품"
-    ];
+  return (
+    <div className={styles.home}>
+      {/* 히어로 섹션 */}
+      <section className={styles.hero}>
+        <h1>ShopMall에 오신 것을 환영합니다!</h1>
+        <p>최고의 상품을 최저가로 만나보십쇼</p>
+        <Link to="/products" className={styles.heroButton}>
+          전체 상품 보기
+        </Link>
+      </section>
 
-    return (
-        <div className={styles.home}>
-            {/* 히어로 섹션 */}
-            <section className={styles.hero}>
-                <h1>ShopMall에 오신 것을 환영합니다!</h1>
-                <p>최고의 상품을 최저가로 만나보십쇼</p>
-                <Link to="/products" className={styles.heroButton}>
-                    전체 상품 보기
-                </Link>
-            </section>
-
-            {/* 카테고리 섹션 */}
-            <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>카테고리</h2>
-                <div className={styles.categories}>
-                    {categories.map(c => (
-                        <Link
-                            key={c}
-                            to={`/products?category=${c}`}
-                            className={styles.categoryCard}
-                        >
-                            {c}
-                        </Link>
-                    ))}
-                </div>
-            </section>
-
-            {/* 베스트 상품 */}
-            <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>베스트 상품</h2>
-                <div className={styles.productGrid}>
-                    {bestProducts.map(p => (
-                        <ProductCard key={p.id} product={p}/>
-                    ))}
-                </div>
-            </section>
-
-            {/* 신상품 */}
-            <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>✨신상품</h2>
-                <div className={styles.productGrid}>
-                    {newProducts.map(p => (
-                        <ProductCard key={p.id} product={p}/>
-                    ))}
-                </div>
-            </section>
+      {/* 카테고리 섹션 */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>카테고리</h2>
+        <div className={styles.categories}>
+          {categories.map((c) => (
+            <Link
+              key={c}
+              to={`/products?category=${c}`}
+              className={styles.categoryCard}
+            >
+              {c}
+            </Link>
+          ))}
         </div>
-    );
+      </section>
+
+      {/* 베스트 상품 */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>베스트 상품</h2>
+        <div className={styles.productGrid}>
+          {bestProducts.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+
+      {/* 신상품 */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>✨신상품</h2>
+        <div className={styles.productGrid}>
+          {newProducts.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default Home;
