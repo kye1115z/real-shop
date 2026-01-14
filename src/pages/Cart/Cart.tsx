@@ -53,20 +53,16 @@ function Cart() {
                 </Link>
                 {/* 선택한 옵션 */}
                 {item.selectedOptions && (
-                  <p className={styles.options}>
-                    {Object.entries(item.selectedOptions)
-                      .map(([key, value]) => (
-                        <span key={key}>
-                          {key}: {value}
-                        </span>
-                      ))
-                      .reduce((prev, curr) => (
-                        <>
-                          {prev} / {curr}
-                        </>
-                      ))}
-                  </p>
-                )}
+  <p className={styles.options}>
+    {Object.entries(item.selectedOptions).map(([key, value], index, array) => (
+      <span key={key}>
+        {key}: {value}
+        {/* 마지막 요소가 아닐 때만 / 구분자 표시 */}
+        {index < array.length - 1 && " / "}
+      </span>
+    ))}
+  </p>
+)}
                 <p className={styles.price}>
                   {item.product.price.toLocaleString()}원
                 </p>
