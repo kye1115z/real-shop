@@ -1,13 +1,7 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  ReactNode,
-} from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 import type { Product, CartItem } from "../types";
 
-interface CartContextType {
+export interface CartContextType {
   items: CartItem[];
   addToCart: (
     product: Product,
@@ -116,12 +110,4 @@ export function CartProvider({ children }: CartProviderProps) {
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error("useCart는 CartProvider 안에서만 사용할 수 있습니다.");
-  }
-  return context;
 }
