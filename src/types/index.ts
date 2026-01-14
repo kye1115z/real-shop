@@ -23,7 +23,7 @@ export interface Product {
     stock:number;
     rating:number;
     reviewCount:number;
-    option?:ProductOption[];
+    options?:ProductOption[];
     isBest?: boolean;
     isNew?: boolean;
 }
