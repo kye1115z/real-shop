@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
 
 function ProductList() {
-  const { filterProducts, products } = useProducts();
+  const { filterProducts } = useProducts();
   const [searchParams] = useSearchParams();
 
   //필터 상태
