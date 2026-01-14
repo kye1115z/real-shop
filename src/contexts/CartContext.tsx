@@ -15,7 +15,9 @@ export interface CartContextType {
   totalItems: number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(
+  undefined
+);
 
 interface CartProviderProps {
   children: ReactNode;

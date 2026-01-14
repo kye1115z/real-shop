@@ -11,7 +11,9 @@ export interface ProductContextType {
   filterProducts: (filter: FilterState) => Product[];
 }
 
-const ProductContext = createContext<ProductContextType | undefined>(undefined);
+export const ProductContext = createContext<ProductContextType | undefined>(
+  undefined
+);
 
 interface ProductProviderProps {
   children: ReactNode;

@@ -1,10 +1,7 @@
-import { createContext, useContext } from "react";
-import type { ProductContextType } from "../contexts/ProductContext";
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
 export function useProducts() {
-  const ProductContext = createContext<ProductContextType | undefined>(
-    undefined
-  );
   const context = useContext(ProductContext);
   if (context === undefined) {
     throw new Error(
